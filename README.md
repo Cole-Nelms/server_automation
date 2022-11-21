@@ -1,2 +1,2 @@
 # server_automation
-Automation piplines for my personal servers.
+This repository contains Ansible, Docker, and scripting automation for my personal servers.

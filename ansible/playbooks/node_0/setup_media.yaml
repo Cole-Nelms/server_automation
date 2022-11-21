@@ -1,0 +1,27 @@
+- name: Setup media drives
+  hosts: node_0
+  remote_user: server-admin
+  become: yes
+
+  vars:
+    media:
+      - { path: '/mnt/hdd_0', src: 'UUID=D2A4301AA430040F', fstype: 'ntfs' }
+      - { path: '/mnt/usb_0', src: 'UUID=D377-C5CD', fstype: 'vfat' }
+
+  tasks:
+  - name: Create media paths
+    file:
+      path: "{{ item.path }}"
+      state: directory
+      recurse: yes
+    loop:
+      "{{ media }}"
+
+  - name: Mount media, update fs table
+    mount:
+      path: "{{ item.path }}"
+      src: "{{ item.src }}"
+      fstype: "{{ item.fstype }}"
+      state: mounted
+    loop:
+      "{{ media }}"

@@ -1,0 +1,9 @@
+- name: Install Mullvad
+  hosts: all
+  remote_user: server-admin
+  become: yes
+
+  tasks:
+  - name: Install
+    apt:
+      deb: https://mullvad.net/download/app/deb/latest/

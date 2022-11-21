@@ -1,0 +1,22 @@
+- name: Deploy qBittorent-nox container
+  hosts: node_0
+  remote_user: server-admin
+  become: yes
+
+  - name: Create container
+    docker_container:
+      name: qbittorent-nox
+      image: tsubus/qbittorrent-nox
+      user: root:root
+      restart_policy: always
+      read_only: no
+      env:
+        TZ: "US/Eastern"
+        UMASK_SET: "022"
+      published_ports:
+        - 8080:8080
+        - 8999:8999
+      volumes:
+        - "/config/qbittorentnox_config:/config"
+        - "/mnt/hdd_0:/mnt/hdd_0"
+        - "/mnt/usb_0:/mnt/usb_0"

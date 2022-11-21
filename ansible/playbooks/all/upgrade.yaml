@@ -1,0 +1,11 @@
+- name: Upgrade systems
+  hosts: all
+  remote_user: server-admin
+  become: yes
+
+  tasks:
+  - name: Upgrade
+    apt:
+      update_cache: true
+      name: "*"
+      state: latest

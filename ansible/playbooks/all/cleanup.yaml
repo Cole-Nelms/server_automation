@@ -1,0 +1,17 @@
+- name: Cleanup systems
+  hosts: all
+  remote_user: server-admin
+  become: yes
+
+  tasks:
+  - name: Autoremove
+    apt:
+      autoremove: yes
+
+  - name: Autoclean
+    apt:
+      autoclean: yes
+
+  - name: Purge
+    apt:
+      purge: yes
